@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/utils/actions/auth"
+import { signOut } from "@/utils/auth/actions"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { createBrowserClient } from '@supabase/ssr'

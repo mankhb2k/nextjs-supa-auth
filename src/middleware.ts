@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  const publicRoutes = ['/sign-in', '/', '/auth/callback']
+  const publicRoutes = ['/sign-in', '/sign-up', '/', '/auth/callback']
   const isPublicRoute = publicRoutes.includes(pathname)
 
   if (isPublicRoute && user) {

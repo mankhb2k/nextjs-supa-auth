@@ -1,59 +1,73 @@
-'use client'
-
+// src/app/login/page.tsx
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { signIn } from '@/utils/auth/actions'
 import GoogleSignInButton from '@/components/auth/google-login-btn'
 
-export default function SignInPage() {
+export default function SignInPage({
+  searchParams,
+}: {
+  searchParams: { message?: string; error?: string }
+}) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 space-y-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2 text-gray-800">Đăng nhập</h1>
-          <p className="text-gray-500 text-sm">
-            Chào mừng bạn quay lại! Vui lòng đăng nhập để tiếp tục.
-          </p>
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+      <Card className="w-[380px]">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl">Đăng nhập tài khoản</CardTitle>
+          <CardDescription>
+            Sử dụng email/mật khẩu hoặc đăng nhập với Google.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            {/* Nút Đăng nhập với Google */}
+            <GoogleSignInButton />
 
-        <div className="mt-6">
-          <GoogleSignInButton />
-        </div>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-muted-foreground">Hoặc tiếp tục với</span>
+              </div>
+            </div>
 
-        <div className="relative mt-6">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-gray-300"></span>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-2 text-gray-400">hoặc</span>
-          </div>
-        </div>
+            {/* Form Đăng nhập Email/Mật khẩu */}
+            <form className="grid gap-4" action={signIn}>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" name="email" type="email" placeholder="email@example.com" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Mật khẩu</Label>
+                <Input id="password" name="password" type="password" required />
+              </div>
+              
+              {/* Hiển thị thông báo lỗi/thành công */}
+              {searchParams.error && (
+                <p className="text-sm font-medium text-red-600 mt-2">{searchParams.error}</p>
+              )}
+              {searchParams.message && (
+                <p className="text-sm font-medium text-green-600 mt-2">{searchParams.message}</p>
+              )}
 
-        <form action="#" className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              className="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black p-2"
-              placeholder="you@example.com"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Mật khẩu</label>
-            <input
-              type="password"
-              className="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring-black focus:border-black p-2"
-              placeholder="••••••••"
-              required
-            />
-          </div>
+              <Button type="submit" className="w-full">
+                Đăng nhập
+              </Button>
+            </form>
 
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition"
-          >
-            Đăng nhập
-          </button>
-        </form>
-      </div>
+            <p className="text-center text-sm text-gray-500 mt-2">
+                Chưa có tài khoản?{' '}
+                <Link href="/register" className="underline hover:text-primary">
+                    Đăng ký ngay
+                </Link>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
