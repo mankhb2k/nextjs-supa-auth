@@ -61,7 +61,7 @@ export default function SignInPage({
 
             <p className="text-center text-sm text-gray-500 mt-2">
                 Chưa có tài khoản?{' '}
-                <Link href="/register" className="underline hover:text-primary">
+                <Link href="/sign-up" className="underline hover:text-primary">
                     Đăng ký ngay
                 </Link>
             </p>

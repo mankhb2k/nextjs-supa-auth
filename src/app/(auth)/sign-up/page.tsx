@@ -46,7 +46,7 @@ export default function RegisterPage({
             
             <p className="text-center text-sm text-gray-500 mt-2">
                 Đã có tài khoản?{' '}
-                <Link href="/login" className="underline hover:text-primary">
+                <Link href="/sign-in" className="underline hover:text-primary">
                     Đăng nhập
                 </Link>
             </p>
